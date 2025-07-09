@@ -1,6 +1,7 @@
+# Allow HTTP trafic from internet to load balancer
 resource "aws_security_group" "alb_sg" {
   name   = "alb-sg"
-  description = "Allow HTTP"  
+  description = "Allow HTTP traffic from internet"  
   vpc_id = var.vpc_id
 
   ingress {
@@ -18,6 +19,7 @@ resource "aws_security_group" "alb_sg" {
   }
 }
 
+# Allow SSH trafic from cidr & HTTP traffic from loadbalancer
 resource "aws_security_group" "ec2_sg" {
   name   = "ec2-sg"
   description = "Allow SSH from CIDR"
@@ -44,3 +46,4 @@ resource "aws_security_group" "ec2_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
