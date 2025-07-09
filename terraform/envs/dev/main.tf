@@ -12,7 +12,7 @@ module "vpc" {
 module "sg" {
   source           = "../../modules/security_groups"
   vpc_id           = module.vpc.vpc_id
-  allowed_ssh_cidr = "103.244.155.136/32"
+  allowed_ssh_cidr = "3.85.171.166/32"
 }
 
 module "web" {
