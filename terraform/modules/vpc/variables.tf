@@ -5,3 +5,5 @@ variable "public_subnet_cidrs" {
 variable "azs" {
   type = list(string)
 }
+variable "env" {}
+

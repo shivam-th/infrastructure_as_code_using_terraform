@@ -14,6 +14,9 @@ resource "aws_launch_template" "web" {
   instance_type = var.instance_type
   user_data     = filebase64("${path.module}/user_data.sh")
 
+  tags = {
+    Name = "web-instance-${var.env}"
+  }
 }
 
 resource "aws_autoscaling_group" "web_asg" {
@@ -25,9 +28,9 @@ resource "aws_autoscaling_group" "web_asg" {
     id      = aws_launch_template.web.id
     version = "$Latest"
   }
-
   target_group_arns = [aws_lb_target_group.web_tg.arn]
   health_check_type = "EC2"
+
 }
 
 resource "aws_lb" "web_alb" {
@@ -36,6 +39,12 @@ resource "aws_lb" "web_alb" {
   load_balancer_type = "application"
   subnets            = var.subnet_ids
   security_groups    = [var.alb_sg_id]
+
+  
+  tags = {
+    Name = "web-alb-${var.env}"
+  }
+
 }
 
 resource "aws_lb_target_group" "web_tg" {
@@ -43,6 +52,11 @@ resource "aws_lb_target_group" "web_tg" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = var.vpc_id
+
+  
+  tags = {
+    Name = "web-tg-${var.env}"
+  }
 }
 
 resource "aws_lb_listener" "web_listener" {
@@ -54,5 +68,11 @@ resource "aws_lb_listener" "web_listener" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.web_tg.arn
   }
+
+  
+  tags = {
+    Name = "web-listener-${var.env}"
+  }
+
 }
 

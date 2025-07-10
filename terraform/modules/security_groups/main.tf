@@ -17,6 +17,12 @@ resource "aws_security_group" "alb_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  
+  tags = {
+    Name = "alb-sg-${var.env}"
+  }
+
 }
 
 # Allow SSH trafic from cidr & HTTP traffic from loadbalancer
@@ -45,5 +51,11 @@ resource "aws_security_group" "ec2_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  
+  tags = {
+    Name = "ec2-sg-${var.env}"
+  }
+
 }
 
