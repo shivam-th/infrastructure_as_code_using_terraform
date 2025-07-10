@@ -1,3 +1,6 @@
+provider "aws" {
+  region = "us-east-1"
+}
 
 resource "aws_security_group" "terraform_sg" {
   name        = "terraform-ssh-access"
