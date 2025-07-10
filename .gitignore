@@ -4,5 +4,3 @@
 **/.terraform.lock.hcl
 **/*.pem
 **/*.tfvars
-
-Doc.docx
